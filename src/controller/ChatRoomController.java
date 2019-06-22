@@ -61,7 +61,7 @@ public class ChatRoomController {
      * Load data user chatRoom
      */
     public void loadInfoBanner() {
-        chatViewRoom.usernameLbl.setText(user.getName() + "\n" + user.getEmail());
+        chatViewRoom.usernameLbl.setText(user.getName() + "<" + user.getEmail()+">");
         
         chatViewRoom.btnSend.addActionListener(new ActionListener() {
             @Override
