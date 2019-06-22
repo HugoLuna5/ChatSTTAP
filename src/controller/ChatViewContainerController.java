@@ -67,9 +67,9 @@ public class ChatViewContainerController {
             int id = user.getId();
             String phone = user.getPhone();
 
-            itemData.setId(String.valueOf(id));
+            itemData.setId(id);
             itemData.setImageUrl("/Users/hugoluna/Desktop/user.png");
-            itemData.setLastMessage(email);
+            itemData.setEmail(email);
             itemData.setName(name);
             itemList.add(item);
             panel.add(item);

@@ -13,17 +13,19 @@ public class ItemChatContact {
     
     private String imageUrl;
     private String name;
-    private String id;
-    private String lastMessage;
+    private int id;
+    private String email;
+    private String phone;
 
     public ItemChatContact() {
     }
 
-    public ItemChatContact(String imageUrl, String name, String id, String lastMessage) {
+    public ItemChatContact(String imageUrl, String name, int id, String email, String phone) {
         this.imageUrl = imageUrl;
         this.name = name;
         this.id = id;
-        this.lastMessage = lastMessage;
+        this.phone = email;
+        this.phone = phone;
     }
 
     public String getImageUrl() {
@@ -42,21 +44,31 @@ public class ItemChatContact {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getLastMessage() {
-        return lastMessage;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastMessage(String lastMessage) {
-        this.lastMessage = lastMessage;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+   
     
     
     
