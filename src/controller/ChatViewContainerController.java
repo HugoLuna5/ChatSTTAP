@@ -57,6 +57,7 @@ public class ChatViewContainerController {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
+        ArrayList<ItemList> itemList = new ArrayList<ItemList>();
 
         for (int i = 0; i < userList.size(); i++) {
             ItemList item = new ItemList();
@@ -70,32 +71,11 @@ public class ChatViewContainerController {
             itemData.setImageUrl("/Users/hugoluna/Desktop/user.png");
             itemData.setLastMessage(email);
             itemData.setName(name);
-
+            itemList.add(item);
             panel.add(item);
 
-            item.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    actionClick(email, name, id, phone);
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    actionClick(email, name, id, phone);
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
-            });
+            //actionClick(email, name, id, phone);
+            item.addMouseListener(new MListener(id, email, name, phone));
 
             new ItemController(item, itemData);
 
@@ -120,6 +100,80 @@ public class ChatViewContainerController {
         chatView.chatContent.add(chatRoomView);
         new ChatRoomController(chatRoomView, user, socket, message, service, us, room);
         chatView.chatContent.revalidate();
+    }
+
+    class MListener implements MouseListener {
+
+        private int id;
+        private String email;
+        private String name;
+        private String phone;
+
+        public MListener(int id, String email, String name, String phone) {
+            this.id = id;
+            this.email = email;
+            this.name = name;
+            this.phone = phone;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+        
+        
+        
+        
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            actionClick(email, name, id, phone);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+             actionClick(email, name, id, phone);
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
     }
 
     public void actionClick(String email, String name, int id, String phone) {

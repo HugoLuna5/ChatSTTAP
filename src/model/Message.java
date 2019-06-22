@@ -85,7 +85,7 @@ public class Message {
     public boolean createMessage(Message message) {
         boolean aux = false;
 
-        String query = "INSERT INTO menssage (id_user, id_room, message) VALUES(?,?,?)";
+        String query = "INSERT INTO message (id_user, id_room, message) VALUES(?,?,?)";
 
         try {
             Connection conexion = new Conexion().getConnection();
