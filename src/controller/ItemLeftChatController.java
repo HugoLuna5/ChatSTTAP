@@ -21,6 +21,7 @@ public class ItemLeftChatController {
         this.itemLeftChat = itemLeftChat;
         this.message = message;
         //this.itemLeftChat.setVisible(true);
+        itemLeftChat.message.setText(message);
         
         itemLeftChat.imageUser.setIcon(new ImageRounded().loadImage("/Users/hugoluna/Desktop/user.png", 50));
         itemLeftChat.message.setOpaque(false);

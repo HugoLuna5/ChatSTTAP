@@ -21,6 +21,7 @@ public class ItemRightChatController {
     public ItemRightChatController(ItemRightChat itemRightChat, String message) {
         this.itemRightChat = itemRightChat;
         this.message = message;
+        itemRightChat.message.setText(message);
         //this.itemRightChat.setVisible(true);
         itemRightChat.imageUser.setIcon(new ImageRounded().loadImage("/Users/hugoluna/Desktop/user.png", 50));
         itemRightChat.message.setOpaque(false);

@@ -31,6 +31,7 @@ import model.ChatMessage;
 import model.User;
 import service.ClientService;
 import utils.ImageRounded;
+import utils.Toaster;
 import view.ChatViewContainerView;
 import view.HomeView;
 import view.LoginView;
@@ -49,12 +50,14 @@ public class HomeController {
     private Socket socket;
     private ChatMessage message;
     private ClientService service;
+    private Toaster toaster;
    
 
     public HomeController(HomeView homeView, User user) {
         this.homeView = homeView;
         this.user = user;
         this.homeView.setVisible(true);
+         toaster = new Toaster(homeView.containerMain);
         this.homeView.containerMain.setLayout(new BorderLayout());
         chatViewContainerView = new ChatViewContainerView();
         init();
@@ -158,6 +161,7 @@ public class HomeController {
                         socket.close();
                     } else if (action.equals(ChatMessage.Action.SEND_ONE)) {
                         System.out.println("::: " + message.getText() + " :::");
+                        toaster.success("¡Notificación!", "Tienes un nuevo mensaje...");
                         //receive(message);
                     } else if (action.equals(ChatMessage.Action.USERS_ONLINE)) {
                         refreshOnlines(message);
