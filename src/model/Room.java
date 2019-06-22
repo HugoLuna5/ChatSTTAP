@@ -94,7 +94,7 @@ public class Room {
     
     public Room getRoom(int user_one, int user_two){
         Room room = new Room();
-         String queryVerify = "SELECT * FROM room id_user_one = ? AND id_user_two = ? OR  id_user_one = ? AND id_user_two = ?";
+         String queryVerify = "SELECT * FROM room WHERE id_user_one = ? AND id_user_two = ? OR WHERE id_user_one = ? AND id_user_two = ?";
 
         try {
             Connection conexion = new Conexion().getConnection();
