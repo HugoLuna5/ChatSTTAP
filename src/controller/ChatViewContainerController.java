@@ -76,29 +76,12 @@ public class ChatViewContainerController {
             item.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-
-                    chatRoomView = new ChatRoomView();
-
-                    /**
-                     * Verificar si existe la sala de chat
-                     */
-                    if (!new Room().verifyExistRoom(us.getId(), id)) {
-
-                        new Room().createRoom(us.getId(), id);
-
-                    }
-
-                    User user = new User();
-                    user.setEmail(email);
-                    user.setName(name);
-                    user.setId(id);
-                    user.setPhone(phone);
-                    loadMessageView(user, new Room().getRoom(us.getId(), id));
-
+                    actionClick(email, name, id, phone);
                 }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
+                    actionClick(email, name, id, phone);
                 }
 
                 @Override
@@ -137,6 +120,26 @@ public class ChatViewContainerController {
         chatView.chatContent.add(chatRoomView);
         new ChatRoomController(chatRoomView, user, socket, message, service, us, room);
         chatView.chatContent.revalidate();
+    }
+
+    public void actionClick(String email, String name, int id, String phone) {
+        chatRoomView = new ChatRoomView();
+
+        /**
+         * Verificar si existe la sala de chat
+         */
+        if (!new Room().verifyExistRoom(us.getId(), id)) {
+
+            new Room().createRoom(us.getId(), id);
+
+        }
+
+        User user = new User();
+        user.setEmail(email);
+        user.setName(name);
+        user.setId(id);
+        user.setPhone(phone);
+        loadMessageView(user, new Room().getRoom(us.getId(), id));
     }
 
 }
