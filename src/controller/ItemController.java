@@ -7,8 +7,15 @@ package controller;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.Socket;
+import model.ChatMessage;
 import model.ItemChatContact;
+import model.Room;
+import model.User;
+import service.ClientService;
 import utils.ImageRounded;
+import view.ChatRoomView;
+import view.ChatViewContainerView;
 import view.ItemList;
 
 /**
@@ -18,10 +25,24 @@ import view.ItemList;
 public class ItemController {
     private ItemList itemList;
     private ItemChatContact itemChatContact;
+    private ChatRoomView chatRoomView;
+    private ChatViewContainerView chatView;
+    
+    
+    private Socket socket;
+    private ChatMessage message;
+    private ClientService service;
+    private User us;
+    
 
-    public ItemController(ItemList itemList, ItemChatContact itemChatContact) {
+    public ItemController(ItemList itemList, ItemChatContact itemChatContact,ChatViewContainerView chatView, Socket socket, ChatMessage message, ClientService service, User us) {
         this.itemList = itemList;
         this.itemChatContact = itemChatContact;
+        this.chatView = chatView;
+        this.socket = socket;
+        this.message = message;
+        this.service = service;
+        this.us = us;
         loadDataItem();
         events();
     }
@@ -65,7 +86,34 @@ public class ItemController {
         
     }
 
-   
+    public void actionClick(String email, String name, int id, String phone) {
+        chatRoomView = new ChatRoomView();
+
+        /**
+         * Verificar si existe la sala de chat
+         */
+        if (!new Room().verifyExistRoom(us.getId(), id)) {
+
+            new Room().createRoom(us.getId(), id);
+
+        }
+
+        User user = new User();
+        user.setEmail(email);
+        user.setName(name);
+        user.setId(id);
+        user.setPhone(phone);
+        loadMessageView(user, new Room().getRoom(us.getId(), id));
+    }
+    
+    
+     public void loadMessageView(User user, Room room) {
+        chatView.chatContent.removeAll();
+        chatView.chatContent.repaint();
+        chatView.chatContent.add(chatRoomView);
+        new ChatRoomController(chatRoomView, user, socket, message, service, us, room);
+        chatView.chatContent.revalidate();
+    }
     
     
     

@@ -46,34 +46,32 @@ public class HomeController {
     private User user;
     private ChatViewContainerView chatViewContainerView;
     private ChatViewContainerController chatViewContainerController;
-    
+
     private Socket socket;
     private ChatMessage message;
     private ClientService service;
     private Toaster toaster;
-   
 
     public HomeController(HomeView homeView, User user) {
         this.homeView = homeView;
         this.user = user;
         this.homeView.setVisible(true);
-         toaster = new Toaster(homeView.containerMain);
+        toaster = new Toaster(homeView.containerMain);
         this.homeView.containerMain.setLayout(new BorderLayout());
         chatViewContainerView = new ChatViewContainerView();
         init();
-        
+
         events();
         homeView.btnChat.doClick();
-        
+
     }
-    
-    public void init(){
-       
+
+    public void init() {
+
         homeView.lblImage.setIcon(new ImageRounded().loadImage("/Users/hugoluna/Desktop/user.png", 85));
         homeView.setResizable(false);
-        
-        
-         String name = user.getEmail().toString();
+
+        String name = user.getEmail().toString();
 
         if (!name.isEmpty()) {
             this.message = new ChatMessage();
@@ -87,45 +85,40 @@ public class HomeController {
 
             this.service.send(message);
         }
-        
-        
-        
-    }    
-    
+
+    }
 
     public void events() {
-        
+
         homeView.btnChat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //loadDefaults();
-                
-            
+
             }
         });
-        
+
         homeView.btnExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 homeView.setVisible(false);
                 deletePreferences();
-                
+
                 ChatMessage message = new ChatMessage();
                 message.setName(message.getName());
                 message.setAction(ChatMessage.Action.DISCONNECT);
                 service.send(message);
                 disconnected();
-                
+
                 new LoginController(new LoginView());
-                
+
             }
         });
 
     }
-    
-    
-     public void deletePreferences() {
+
+    public void deletePreferences() {
 
         Preferences prefs = Preferences.userNodeForPackage(controller.LoginController.class);
         final String PREF_NAME = "email";
@@ -133,8 +126,6 @@ public class HomeController {
 
     }
 
-    
-    
     private class ListenerSocket implements Runnable {
 
         private ObjectInputStream input;
@@ -160,11 +151,19 @@ public class HomeController {
                         disconnected();
                         socket.close();
                     } else if (action.equals(ChatMessage.Action.SEND_ONE)) {
-                        System.out.println("::: " + message.getText() + " :::");
                         String emailUs = message.getName();
+
                         User reciveData = new User().getData(emailUs);
-                        toaster.success("¡Recibiste un mensaje!", "Tienes un nuevo mensaje de "+reciveData.getName());
-                        //receive(message);
+
+                        if (!message.getText().equals(" hasta luego!")) {
+                            System.out.println("::: " + message.getText() + " :::");
+                            toaster.success("¡Recibiste un mensaje!", "Tienes un nuevo mensaje de " + reciveData.getName());
+                            //receive(message);
+                        } else {
+                            toaster.error("¡Notificación!", "El usuario " + reciveData.getName() + " ya no se encuentra en linea");
+
+                        }
+
                     } else if (action.equals(ChatMessage.Action.USERS_ONLINE)) {
                         refreshOnlines(message);
                     }
@@ -176,11 +175,8 @@ public class HomeController {
             }
         }
     }
-    
-    
-    
-    
-     private void connected(ChatMessage message) {
+
+    private void connected(ChatMessage message) {
         if (message.getText().equals("NO")) {
             //this.txtName.setText("");
             JOptionPane.showMessageDialog(homeView.containerMain, "Conexion no realizada!\nIntente nuevamente.");
@@ -195,16 +191,13 @@ public class HomeController {
 
         //this.btnConnectar.setEnabled(true);
         //this.txtName.setEditable(true);
-
         //this.btnSair.setEnabled(false);
         //this.txtAreaSend.setEnabled(false);
         //this.txtAreaReceive.setEnabled(false);
         //this.btnEnviar.setEnabled(false);
         //this.btnLimpar.setEnabled(false);
-        
         //this.txtAreaReceive.setText("");
         //this.txtAreaSend.setText("");
-
         JOptionPane.showMessageDialog(homeView.containerMain, "Ha cerrado la sesion!");
     }
 
@@ -214,29 +207,28 @@ public class HomeController {
 
     private void refreshOnlines(ChatMessage message) {
         System.out.println(message.getSetOnlines().toString());
-        
+
         Set<String> names = message.getSetOnlines();
-        
+
         names.remove(message.getName());
-        
+
         String[] array = (String[]) names.toArray(new String[names.size()]);
-        
+
         loadDefaults(array);
-        
+
     }
-    
-    public void loadDefaults(String[] array){
+
+    public void loadDefaults(String[] array) {
         homeView.containerMain.add(chatViewContainerView);
         ArrayList<User> userList = new ArrayList<User>();
         for (int i = 0; i < array.length; i++) {
             User user = new User().getData(array[i]);
             userList.add(user);
-            
+
         }
-        
-        chatViewContainerController = new ChatViewContainerController(chatViewContainerView, userList,socket, message, service, user);
+
+        chatViewContainerController = new ChatViewContainerController(chatViewContainerView, userList, socket, message, service, user);
         homeView.containerMain.revalidate();
     }
-    
 
 }

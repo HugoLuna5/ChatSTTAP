@@ -31,7 +31,6 @@ import view.ItemList;
 public class ChatViewContainerController {
 
     private ChatViewContainerView chatView;
-    private ChatRoomView chatRoomView;
     private ArrayList<User> userList;
     private Socket socket;
     private ChatMessage message;
@@ -59,9 +58,9 @@ public class ChatViewContainerController {
         chatView.chatContent.repaint();
         ArrayList<ItemList> itemList = new ArrayList<ItemList>();
         
-        
+         ItemList item;
         for( User user: userList){
-            ItemList item = new ItemList();
+            item = new ItemList();
             ItemChatContact itemData = new ItemChatContact();
             String name = user.getName();
             String email = user.getEmail();
@@ -76,9 +75,10 @@ public class ChatViewContainerController {
             panel.add(item);
 
             //actionClick(email, name, id, phone);
-            item.addMouseListener(new MListener(id, email, name, phone));
+            //mListener = new MListener(id, email, name, phone);
+            //item.addMouseListener(mListener);
 
-            new ItemController(item, itemData);
+            new ItemController(item, itemData, chatView, socket, message, service, us);
 
             System.out.println("Lista usuario");
         }
@@ -97,106 +97,5 @@ public class ChatViewContainerController {
 
     }
 
-    public void loadMessageView(User user, Room room) {
-        chatView.chatContent.removeAll();
-        chatView.chatContent.repaint();
-        chatView.chatContent.add(chatRoomView);
-        new ChatRoomController(chatRoomView, user, socket, message, service, us, room);
-        chatView.chatContent.revalidate();
-    }
-
-    class MListener implements MouseListener {
-
-        private int id;
-        private String email;
-        private String name;
-        private String phone;
-
-        public MListener(int id, String email, String name, String phone) {
-            this.id = id;
-            this.email = email;
-            this.name = name;
-            this.phone = phone;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-        
-        
-        
-        
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            actionClick(email, name, id, phone);
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-             actionClick(email, name, id, phone);
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
-
-    }
-
-    public void actionClick(String email, String name, int id, String phone) {
-        chatRoomView = new ChatRoomView();
-
-        /**
-         * Verificar si existe la sala de chat
-         */
-        if (!new Room().verifyExistRoom(us.getId(), id)) {
-
-            new Room().createRoom(us.getId(), id);
-
-        }
-
-        User user = new User();
-        user.setEmail(email);
-        user.setName(name);
-        user.setId(id);
-        user.setPhone(phone);
-        loadMessageView(user, new Room().getRoom(us.getId(), id));
-    }
 
 }
