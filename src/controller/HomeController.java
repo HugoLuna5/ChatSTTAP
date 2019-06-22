@@ -58,9 +58,10 @@ public class HomeController {
         this.homeView = homeView;
         this.user = user;
         this.homeView.setVisible(true);
-        toaster = new Toaster(homeView.containerMain);
         this.homeView.containerMain.setLayout(new BorderLayout());
         chatViewContainerView = new ChatViewContainerView();
+        toaster = new Toaster(chatViewContainerView.itemListContainer);
+
         init();
 
         events();
@@ -212,33 +213,28 @@ public class HomeController {
 
         //ver si existe una sala de chat abierta
         ChatViewContainerView chatView = chatViewContainerController.chatView;
-        
+
         User us2 = new User().getData(message.getName());
         if (!new Room().verifyExistRoom(user.getId(), us2.getId())) {
 
             new Room().createRoom(user.getId(), us2.getId());
 
         }
-        
-        loadMessageView(user, new Room().getRoom(user.getId(), us2.getId()), chatView);
 
+        loadMessageView(us2, new Room().getRoom(user.getId(), us2.getId()), chatView);
 
     }
-    
-     public void loadMessageView(User us2, Room room, ChatViewContainerView chatView) {
+
+    public void loadMessageView(User us2, Room room, ChatViewContainerView chatView) {
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
-        
-        ChatRoomView chatRoomView;       
+
+        ChatRoomView chatRoomView;
         chatRoomView = new ChatRoomView();
         chatView.chatContent.add(chatRoomView);
         new ChatRoomController(chatRoomView, us2, socket, message, service, user, room);
         chatView.chatContent.revalidate();
     }
-    
-    
-    
-    
 
     private void refreshOnlines(ChatMessage message) {
         System.out.println(message.getSetOnlines().toString());
