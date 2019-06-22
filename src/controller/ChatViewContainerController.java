@@ -55,6 +55,8 @@ public class ChatViewContainerController {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        chatView.chatContent.removeAll();
+        chatView.chatContent.repaint();
 
         for (int i = 0; i < userList.size(); i++) {
             ItemList item = new ItemList();
@@ -64,7 +66,7 @@ public class ChatViewContainerController {
             int id = userList.get(i).getId();
             String phone = userList.get(i).getPhone();
 
-            itemData.setId(String.valueOf(i + 1));
+            itemData.setId(String.valueOf(id));
             itemData.setImageUrl("/Users/hugoluna/Desktop/user.png");
             itemData.setLastMessage(email);
             itemData.setName(name);
