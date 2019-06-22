@@ -161,7 +161,9 @@ public class HomeController {
                         socket.close();
                     } else if (action.equals(ChatMessage.Action.SEND_ONE)) {
                         System.out.println("::: " + message.getText() + " :::");
-                        toaster.success("¡Notificación!", "Tienes un nuevo mensaje...");
+                        String emailUs = message.getName();
+                        User reciveData = new User().getData(emailUs);
+                        toaster.success("¡Recibiste un mensaje!", "Tienes un nuevo mensaje de "+reciveData.getName());
                         //receive(message);
                     } else if (action.equals(ChatMessage.Action.USERS_ONLINE)) {
                         refreshOnlines(message);

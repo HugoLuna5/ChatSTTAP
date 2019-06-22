@@ -37,7 +37,7 @@ public class ChatViewContainerController {
     private ChatMessage message;
     private ClientService service;
     private User us;
-
+    private ArrayList<ItemList> itemList;
     public ChatViewContainerController(ChatViewContainerView chatView, ArrayList<User> userList, Socket socket, ChatMessage message, ClientService service, User us) {
         this.chatView = chatView;
         this.userList = userList;
@@ -57,7 +57,7 @@ public class ChatViewContainerController {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
-        ArrayList<ItemList> itemList = new ArrayList<ItemList>();
+        itemList = new ArrayList<ItemList>();
 
         for (int i = 0; i < userList.size(); i++) {
             ItemList item = new ItemList();
@@ -74,8 +74,7 @@ public class ChatViewContainerController {
             itemList.add(item);
             panel.add(item);
 
-            //actionClick(email, name, id, phone);
-            item.addMouseListener(new MListener(id, email, name, phone));
+            
 
             new ItemController(item, itemData);
 
@@ -91,6 +90,18 @@ public class ChatViewContainerController {
 
         chatView.itemListContainer.add(scrollPane);
         chatView.itemListContainer.revalidate();
+        
+        
+        for (int i = 0; i < itemList.size(); i++) {
+            
+            String name = userList.get(i).getName();
+            String email = userList.get(i).getEmail();
+            int id = userList.get(i).getId();
+            String phone = userList.get(i).getPhone();
+           
+            itemList.get(i).addMouseListener(new MListener(id, email, name, phone));
+            
+        }
 
     }
 

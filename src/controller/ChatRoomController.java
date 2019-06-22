@@ -39,6 +39,7 @@ public class ChatRoomController {
     private ClientService service;
     private JScrollPane scrollPane;
     private Room room;
+    private JPanel panel;
     
     public ChatRoomController(ChatRoomView chatViewRoom, User user, Socket socket, ChatMessage message, ClientService service, User us_sesion, Room room) {
         this.chatViewRoom = chatViewRoom;
@@ -77,7 +78,7 @@ public class ChatRoomController {
      */
     public void loadItems() {
         
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setBackground(new java.awt.Color(255, 255, 255));
         panel.setSize(new Dimension(509, 507));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -132,11 +133,6 @@ public class ChatRoomController {
         if (!text.isEmpty()) {
             this.message.setName(name);
             this.message.setText(text);
-            
-            JPanel panel = new JPanel();
-            panel.setBackground(new java.awt.Color(255, 255, 255));
-            panel.setSize(new Dimension(509, 507));
-            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
             
             ItemRightChat itemRight = new ItemRightChat();
             
