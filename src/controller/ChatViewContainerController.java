@@ -30,7 +30,7 @@ import view.ItemList;
  */
 public class ChatViewContainerController {
 
-    private ChatViewContainerView chatView;
+    public ChatViewContainerView chatView;
     private ArrayList<User> userList;
     private Socket socket;
     private ChatMessage message;
@@ -56,11 +56,10 @@ public class ChatViewContainerController {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
-        ArrayList<ItemList> itemList = new ArrayList<ItemList>();
         
-         ItemList item;
+         
         for( User user: userList){
-            item = new ItemList();
+            ItemList item = new ItemList();
             ItemChatContact itemData = new ItemChatContact();
             String name = user.getName();
             String email = user.getEmail();
@@ -71,7 +70,6 @@ public class ChatViewContainerController {
             itemData.setImageUrl("/Users/hugoluna/Desktop/user.png");
             itemData.setEmail(email);
             itemData.setName(name);
-            itemList.add(item);
             panel.add(item);
 
             //actionClick(email, name, id, phone);

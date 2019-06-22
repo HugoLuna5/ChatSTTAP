@@ -28,10 +28,12 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ChatMessage;
+import model.Room;
 import model.User;
 import service.ClientService;
 import utils.ImageRounded;
 import utils.Toaster;
+import view.ChatRoomView;
 import view.ChatViewContainerView;
 import view.HomeView;
 import view.LoginView;
@@ -158,7 +160,7 @@ public class HomeController {
                         if (!message.getText().equals(" hasta luego!")) {
                             System.out.println("::: " + message.getText() + " :::");
                             toaster.success("¡Recibiste un mensaje!", "Tienes un nuevo mensaje de " + reciveData.getName());
-                            //receive(message);
+                            receive(message);
                         } else {
                             toaster.error("¡Notificación!", "El usuario " + reciveData.getName() + " ya no se encuentra en linea");
 
@@ -201,9 +203,42 @@ public class HomeController {
         JOptionPane.showMessageDialog(homeView.containerMain, "Ha cerrado la sesion!");
     }
 
+    /**
+     * Recive messages from other user online
+     *
+     * @param message
+     */
     private void receive(ChatMessage message) {
-        //this.txtAreaReceive.append(message.getName() + " diz: " + message.getText() + "\n");
+
+        //ver si existe una sala de chat abierta
+        ChatViewContainerView chatView = chatViewContainerController.chatView;
+        
+        User us2 = new User().getData(message.getName());
+        if (!new Room().verifyExistRoom(user.getId(), us2.getId())) {
+
+            new Room().createRoom(user.getId(), us2.getId());
+
+        }
+        
+        loadMessageView(user, new Room().getRoom(user.getId(), us2.getId()), chatView);
+
+
     }
+    
+     public void loadMessageView(User us2, Room room, ChatViewContainerView chatView) {
+        chatView.chatContent.removeAll();
+        chatView.chatContent.repaint();
+        
+        ChatRoomView chatRoomView;       
+        chatRoomView = new ChatRoomView();
+        chatView.chatContent.add(chatRoomView);
+        new ChatRoomController(chatRoomView, us2, socket, message, service, user, room);
+        chatView.chatContent.revalidate();
+    }
+    
+    
+    
+    
 
     private void refreshOnlines(ChatMessage message) {
         System.out.println(message.getSetOnlines().toString());

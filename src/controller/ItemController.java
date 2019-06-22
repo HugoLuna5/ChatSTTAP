@@ -5,6 +5,8 @@
  */
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.Socket;
@@ -22,13 +24,12 @@ import view.ItemList;
  *
  * @author hugoluna
  */
-public class ItemController {
+public class ItemController{
 
     private ItemList itemList;
     private ItemChatContact itemChatContact;
     private ChatRoomView chatRoomView;
     private ChatViewContainerView chatView;
-
     private Socket socket;
     private ChatMessage message;
     private ClientService service;
@@ -51,7 +52,6 @@ public class ItemController {
         itemList.imgItem.setIcon(new ImageRounded().loadImage(itemChatContact.getImageUrl(), 50));
         itemList.usernameLabel.setText(itemChatContact.getName());
         itemList.contentLabel.setText(itemChatContact.getEmail());
-
     }
 
     public void events() {
@@ -59,28 +59,13 @@ public class ItemController {
         itemList.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                chatRoomView = new ChatRoomView();
-
-                /**
-                 * Verificar si existe la sala de chat
-                 */
-                if (!new Room().verifyExistRoom(us.getId(), itemChatContact.getId())) {
-
-                    new Room().createRoom(us.getId(), itemChatContact.getId());
-
-                }
-
-                User user = new User();
-                user.setEmail(itemChatContact.getEmail());
-                user.setName(itemChatContact.getName());
-                user.setId(itemChatContact.getId());
-                user.setPhone(itemChatContact.getPhone());
-                loadMessageView(user, new Room().getRoom(us.getId(), itemChatContact.getId()));
+               action();
 
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
+                action();
             }
 
             @Override
@@ -98,6 +83,30 @@ public class ItemController {
 
     }
 
+    
+    
+    
+    public void action(){
+        chatRoomView = new ChatRoomView();
+
+                /**
+                 * Verificar si existe la sala de chat
+                 */
+                if (!new Room().verifyExistRoom(us.getId(), itemChatContact.getId())) {
+
+                    new Room().createRoom(us.getId(), itemChatContact.getId());
+
+                }
+
+                User user = new User();
+                user.setEmail(itemChatContact.getEmail());
+                user.setName(itemChatContact.getName());
+                user.setId(itemChatContact.getId());
+                user.setPhone(itemChatContact.getPhone());
+                loadMessageView(user, new Room().getRoom(us.getId(), itemChatContact.getId()));
+    }
+    
+    
     public void loadMessageView(User user, Room room) {
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
