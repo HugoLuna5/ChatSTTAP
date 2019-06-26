@@ -56,11 +56,11 @@ public class ItemController {
         itemList.usernameLabel.setText(itemChatContact.getName());
         itemList.contentLabel.setText(itemChatContact.getEmail());
 
-        if (!status) {
-            itemList.status.setIcon(new ImageRounded().loadImage(new Constants().rutaImagenStatusOffline(), 25));
+        if (status) {
+            itemList.status.setIcon(new ImageRounded().loadImage(new Constants().rutaImagenStatusOnline(), 25));
 
         } else {
-            itemList.status.setIcon(new ImageRounded().loadImage(new Constants().rutaImagenStatusOnline(), 25));
+            itemList.status.setIcon(new ImageRounded().loadImage(new Constants().rutaImagenStatusOffline(), 25));
         }
 
     }
