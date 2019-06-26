@@ -25,7 +25,7 @@ public class Constants {
         } else if (isMac()) {
             ruta = "/Users/hugoluna/Desktop/user.png";
         } else if (isUnix()) {
-            ruta = "";
+            ruta = "/home/hugo/Escritorio/user.png";
         } else if (isSolaris()) {
         } else {
             System.out.println("Sistema operativo no reconocido!!");
@@ -43,7 +43,7 @@ public class Constants {
         } else if (isMac()) {
             ruta = "/Users/hugoluna/Desktop/status_online.png";
         } else if (isUnix()) {
-            ruta = "";
+            ruta = "/home/hugo/Escritorio/status_online.png";
         } else if (isSolaris()) {
         } else {
             System.out.println("Sistema operativo no reconocido!!");
@@ -61,7 +61,7 @@ public class Constants {
         } else if (isMac()) {
             ruta = "/Users/hugoluna/Desktop/status_offline.png";
         } else if (isUnix()) {
-            ruta = "";
+            ruta = "/home/hugo/Escritorio/status_offline.png";
         } else if (isSolaris()) {
         } else {
             System.out.println("Sistema operativo no reconocido!!");
