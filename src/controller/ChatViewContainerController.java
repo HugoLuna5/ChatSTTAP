@@ -83,13 +83,13 @@ public class ChatViewContainerController {
 
             for (int i = 0; i < userList.size(); i++) {
 
-                if (user.getEmail().equals(userList.get(i).getEmail())) {
-
-                    new ItemController(item, itemData, chatView, socket, message, service, us, true);
-
-                } else {
+                if (!user.getEmail().equals(userList.get(i).getEmail())) {
 
                     new ItemController(item, itemData, chatView, socket, message, service, us, false);
+
+                } else if(user.getEmail().equals(userList.get(i).getEmail())) {
+
+                    new ItemController(item, itemData, chatView, socket, message, service, us, true);
                 }
 
             }
