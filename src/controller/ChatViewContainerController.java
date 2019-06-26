@@ -32,6 +32,7 @@ public class ChatViewContainerController {
 
     public ChatViewContainerView chatView;
     private ArrayList<User> userList;
+    private ArrayList<ItemController> listC;
     private Socket socket;
     private ChatMessage message;
     private ClientService service;
@@ -45,7 +46,7 @@ public class ChatViewContainerController {
         this.service = service;
         this.us = us;
         this.chatView.setVisible(true);
-
+        listC = new ArrayList<ItemController>();
         loadItems();
 
     }

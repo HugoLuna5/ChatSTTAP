@@ -252,14 +252,19 @@ public class HomeController {
     public void loadDefaults(String[] array) {
         homeView.containerMain.add(chatViewContainerView);
         ArrayList<User> userList = new ArrayList<User>();
-        for (int i = 0; i < array.length; i++) {
+        if (array.length != 0) {
+            for (int i = 0; i < array.length; i++) {
             User user = new User().getData(array[i]);
             userList.add(user);
 
         }
-
-        chatViewContainerController = new ChatViewContainerController(chatViewContainerView, userList, socket, message, service, user);
+            
+             chatViewContainerController = new ChatViewContainerController(chatViewContainerView, userList, socket, message, service, user);
         homeView.containerMain.revalidate();
+            
+        }
+
+       
     }
 
 }

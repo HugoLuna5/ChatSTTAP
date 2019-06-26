@@ -24,7 +24,7 @@ public class ClientService {
     
     public Socket connect() {
         try {
-            this.socket = new Socket("192.168.1.71", 5555);
+            this.socket = new Socket("192.168.43.73", 5555);
             this.output = new ObjectOutputStream(socket.getOutputStream());
         } catch (UnknownHostException ex) {
             Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
