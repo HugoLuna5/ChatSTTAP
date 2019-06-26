@@ -21,16 +21,12 @@ public class Constants {
     public String rutaImagen(){
         String ruta = "/Users/hugoluna/Desktop/user.png";
         if (isWindows()) {
-            System.out.println("Es un Windows");
-            ruta = "";
+            ruta = "C:/Users/Hugo Luna/Desktop/user.png";
         } else if (isMac()) {
-            System.out.println("Es un Mac");
             ruta = "/Users/hugoluna/Desktop/user.png";
         } else if (isUnix()) {
-            System.out.println("Es un Unix/Linux");
             ruta = "";
         } else if (isSolaris()) {
-            System.out.println("Es Solaris");
         } else {
             System.out.println("Sistema operativo no reconocido!!");
             ruta = "/Users/hugoluna/Desktop/user.png";
