@@ -6,6 +6,7 @@
 package controller;
 
 import javax.swing.border.EmptyBorder;
+import utils.Constants;
 import utils.ImageRounded;
 import view.ItemRightChat;
 
@@ -23,7 +24,7 @@ public class ItemRightChatController {
         this.message = message;
         itemRightChat.message.setText(message);
         //this.itemRightChat.setVisible(true);
-        itemRightChat.imageUser.setIcon(new ImageRounded().loadImage("/Users/hugoluna/Desktop/user.png", 50));
+        itemRightChat.imageUser.setIcon(new ImageRounded().loadImage(new Constants().rutaImagen(), 50));
         itemRightChat.message.setOpaque(false);
         //itemRightChat.setBorder(new EmptyBorder(0,0,0,30));
     }

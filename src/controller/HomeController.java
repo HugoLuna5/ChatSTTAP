@@ -31,6 +31,7 @@ import model.ChatMessage;
 import model.Room;
 import model.User;
 import service.ClientService;
+import utils.Constants;
 import utils.ImageRounded;
 import utils.Toaster;
 import view.ChatRoomView;
@@ -71,7 +72,7 @@ public class HomeController {
 
     public void init() {
 
-        homeView.lblImage.setIcon(new ImageRounded().loadImage("/Users/hugoluna/Desktop/user.png", 85));
+        homeView.lblImage.setIcon(new ImageRounded().loadImage(new Constants().rutaImagen(), 85));
         homeView.setResizable(false);
 
         String name = user.getEmail().toString();

@@ -20,6 +20,7 @@ import model.ItemChatContact;
 import model.Room;
 import model.User;
 import service.ClientService;
+import utils.Constants;
 import view.ChatRoomView;
 import view.ChatViewContainerView;
 import view.ItemList;
@@ -68,7 +69,7 @@ public class ChatViewContainerController {
             String phone = user.getPhone();
 
             itemData.setId(id);
-            itemData.setImageUrl("/Users/hugoluna/Desktop/user.png");
+            itemData.setImageUrl(new Constants().rutaImagen());
             itemData.setEmail(email);
             itemData.setName(name);
             panel.add(item);

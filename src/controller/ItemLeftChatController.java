@@ -5,6 +5,7 @@
  */
 package controller;
 
+import utils.Constants;
 import utils.ImageRounded;
 import view.ItemLeftChat;
 
@@ -23,7 +24,7 @@ public class ItemLeftChatController {
         //this.itemLeftChat.setVisible(true);
         itemLeftChat.message.setText(message);
         
-        itemLeftChat.imageUser.setIcon(new ImageRounded().loadImage("/Users/hugoluna/Desktop/user.png", 50));
+        itemLeftChat.imageUser.setIcon(new ImageRounded().loadImage(new Constants().rutaImagen(), 50));
         itemLeftChat.message.setOpaque(false);
     }
     

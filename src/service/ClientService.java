@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.ChatMessage;
+import utils.Constants;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ClientService {
     
     public Socket connect() {
         try {
-            this.socket = new Socket("192.168.43.73", 5555);
+            this.socket = new Socket(new Constants().IPSERVER, 5555);
             this.output = new ObjectOutputStream(socket.getOutputStream());
         } catch (UnknownHostException ex) {
             Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);

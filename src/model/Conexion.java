@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utils.Constants;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Conexion {
     private final String base = "chat";
     private final String user = "hugo";
     private final String password = "hugo1199";
-    private final String url = "jdbc:mysql://192.168.43.73:3306/"+base;
+    private final String url = "jdbc:mysql://"+new Constants().IPSERVER+":3306/"+base;
     private Connection con = null;
     
     

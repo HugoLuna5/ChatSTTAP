@@ -20,7 +20,8 @@ import view.RegisterView;
  *
  * @author hugoluna
  */
-public class LoginController  {
+public class LoginController {
+
     private LoginView loginView;
     private Toaster toaster;
 
@@ -29,9 +30,8 @@ public class LoginController  {
         this.loginView.setVisible(true);
         events();
     }
-    
-    
-    public void events(){
+
+    public void events() {
         loginView.actionRegister.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -55,69 +55,64 @@ public class LoginController  {
             public void mouseExited(MouseEvent e) {
             }
         });
-        
-        
+
         loginView.btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 processLogin();
-                
+
             }
         });
-        
+
     }
-    
-    
-    public void processLogin(){
-         toaster = new Toaster(loginView.mainContainer);
+
+    public void processLogin() {
+        toaster = new Toaster(loginView.mainContainer);
         String email = loginView.fieldEmail.getText().toString();
         String password = loginView.passField.getText().toString();
-        
+
         if (!email.isEmpty() && !password.isEmpty()) {
-            
-            
+
             User user = new User();
             user.setEmail(email);
             user.setPassword(password);
-                        
+            loginView.btnLogin.setEnabled(false);
             if (new User().loginUser(user)) {
                 toaster.success("¡Genial!", "Has ingresado correctamente");
                 savePreferences(String.valueOf(user.getEmail()));
-                
-                invisibleView();
-                
-                new HomeController(new HomeView(), user);
-                
-                
-            }else{
-             toaster.error("¡Ups ocurrio un error!", "Es posible que los datos no existan en nuestros registros");
 
+                invisibleView();
+
+                new HomeController(new HomeView(), user);
+
+            } else {
+                toaster.error("¡Ups ocurrio un error!", "Es posible que los datos no existan en nuestros registros");
+                loginView.btnLogin.setEnabled(true);
             }
-        }else{
+        } else {
+            loginView.btnLogin.setEnabled(true);
             toaster.info("¡Ups!.", "Debes llenar los campos para ingresar");
         }
-        
-        
+
     }
-    
-    
-    public void invisibleView(){
+
+    public void invisibleView() {
         loginView.setVisible(false);
     }
-    
-    
-    
-     /***
+
+    /**
+     * *
      * Guardar los datos de los alumnos en las preferencias
-     * @param id 
+     *
+     * @param id
      */
     public void savePreferences(String email) {
 
         Preferences prefs = Preferences.userNodeForPackage(controller.LoginController.class);
         final String PREF_NAME = "email";
-        
+
         prefs.put(PREF_NAME, email);
 
     }
-    
+
 }
