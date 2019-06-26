@@ -193,15 +193,6 @@ public class HomeController {
 
     private void disconnected() {
 
-        //this.btnConnectar.setEnabled(true);
-        //this.txtName.setEditable(true);
-        //this.btnSair.setEnabled(false);
-        //this.txtAreaSend.setEnabled(false);
-        //this.txtAreaReceive.setEnabled(false);
-        //this.btnEnviar.setEnabled(false);
-        //this.btnLimpar.setEnabled(false);
-        //this.txtAreaReceive.setText("");
-        //this.txtAreaSend.setText("");
         JOptionPane.showMessageDialog(homeView.containerMain, "Ha cerrado la sesion!");
     }
 
@@ -261,7 +252,7 @@ public class HomeController {
         }
             
              chatViewContainerController = new ChatViewContainerController(chatViewContainerView, userList, socket, message, service, user);
-        homeView.containerMain.revalidate();
+             homeView.containerMain.revalidate();
             
         }
 

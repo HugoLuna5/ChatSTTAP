@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -48,6 +49,7 @@ public class ChatViewContainerController {
         this.us = us;
         this.chatView.setVisible(true);
         listC = new ArrayList<ItemController>();
+        chatView.itemListContainer.setLayout(new BorderLayout());
         loadItems();
 
     }
@@ -55,12 +57,16 @@ public class ChatViewContainerController {
     public void loadItems() {
 
         JPanel panel = new JPanel();
+        panel.setSize(509, 507);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
-        
-         
-        for( User user: userList){
+
+        ArrayList<User> listAllUser = new User().getAllUsers();
+
+        int i = 0;
+        for (User user : listAllUser) {
+
             ItemList item = new ItemList();
             ItemChatContact itemData = new ItemChatContact();
             String name = user.getName();
@@ -74,16 +80,16 @@ public class ChatViewContainerController {
             itemData.setName(name);
             panel.add(item);
 
-            //actionClick(email, name, id, phone);
-            //mListener = new MListener(id, email, name, phone);
-            //item.addMouseListener(mListener);
+            if (user.getEmail().equals(userList.get(i).getEmail())) {
 
-            new ItemController(item, itemData, chatView, socket, message, service, us);
+                new ItemController(item, itemData, chatView, socket, message, service, us, true);
+
+            } else {
+                new ItemController(item, itemData, chatView, socket, message, service, us, false);
+            }
 
             System.out.println("Lista usuario");
         }
-
-        
 
         panel.revalidate();
         JScrollPane scrollPane = new JScrollPane(panel);
@@ -96,6 +102,5 @@ public class ChatViewContainerController {
         chatView.itemListContainer.revalidate();
 
     }
-
 
 }

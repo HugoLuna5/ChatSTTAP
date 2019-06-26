@@ -35,12 +35,20 @@ public class ItemList extends javax.swing.JPanel {
         imgItem = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         contentLabel = new javax.swing.JLabel();
+        status = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(255, 70));
+        setMinimumSize(new java.awt.Dimension(255, 70));
 
         usernameLabel.setText("Username");
 
         contentLabel.setText("message for user");
+
+        status.setMaximumSize(new java.awt.Dimension(25, 25));
+        status.setMinimumSize(new java.awt.Dimension(25, 25));
+        status.setPreferredSize(new java.awt.Dimension(25, 25));
+        status.setSize(new java.awt.Dimension(25, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,7 +61,9 @@ public class ItemList extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 50, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 7, Short.MAX_VALUE))
                     .addComponent(contentLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -63,11 +73,13 @@ public class ItemList extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(usernameLabel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usernameLabel)
+                            .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(contentLabel))
                     .addComponent(imgItem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -75,6 +87,7 @@ public class ItemList extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel contentLabel;
     public javax.swing.JLabel imgItem;
+    public javax.swing.JLabel status;
     public javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

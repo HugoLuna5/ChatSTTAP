@@ -36,6 +36,42 @@ public class Constants {
     }
     
     
+    public String rutaImagenStatusOnline(){
+        String ruta = "/Users/hugoluna/Desktop/status_online.png";
+        if (isWindows()) {
+            ruta = "C:/Users/Hugo Luna/Desktop/user.png";
+        } else if (isMac()) {
+            ruta = "/Users/hugoluna/Desktop/status_online.png";
+        } else if (isUnix()) {
+            ruta = "";
+        } else if (isSolaris()) {
+        } else {
+            System.out.println("Sistema operativo no reconocido!!");
+            ruta = "/Users/hugoluna/Desktop/status_online.png";
+        }
+        
+        return ruta;
+    }
+    
+    
+    public String rutaImagenStatusOffline(){
+        String ruta = "/Users/hugoluna/Desktop/status_offline.png";
+        if (isWindows()) {
+            ruta = "C:/Users/Hugo Luna/Desktop/user.png";
+        } else if (isMac()) {
+            ruta = "/Users/hugoluna/Desktop/status_offline.png";
+        } else if (isUnix()) {
+            ruta = "";
+        } else if (isSolaris()) {
+        } else {
+            System.out.println("Sistema operativo no reconocido!!");
+            ruta = "/Users/hugoluna/Desktop/status_offline.png";
+        }
+        
+        return ruta;
+    }
+    
+    
     
     public static boolean isWindows() {
         return (OS.indexOf("win") >= 0);

@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.Security;
 
 /**
@@ -153,6 +156,37 @@ public class User {
 
     }
 
+    
+    
+    public ArrayList<User> getAllUsers(){
+        ArrayList<User> listUser = new ArrayList<User>();
+        String query = "SELECT * FROM user";
+        
+        
+        try {
+            Connection conexion = new Conexion().getConnection();
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                User user = new User().getData(rs.getString("email"));
+                listUser.add(user);
+                
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+        
+        return listUser;
+    }
     
    
     
