@@ -62,7 +62,7 @@ public class ChatViewContainerController {
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
 
-        ArrayList<User> listAllUser = new User().getAllUsers();
+        ArrayList<User> listAllUser = new User().getAllUsers(us.getId());
 
         int i = 0;
         for (User user : listAllUser) {
