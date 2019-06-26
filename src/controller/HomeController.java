@@ -150,7 +150,7 @@ public class HomeController {
                     ChatMessage.Action action = message.getAction();
 
                     if (action.equals(ChatMessage.Action.CONNECT)) {
-                        //connected(message);
+                        connected(message);
                     } else if (action.equals(ChatMessage.Action.DISCONNECT)) {
                         disconnected();
                         socket.close();
@@ -182,7 +182,6 @@ public class HomeController {
 
     private void connected(ChatMessage message) {
         if (message.getText().equals("NO")) {
-            //this.txtName.setText("");
             JOptionPane.showMessageDialog(homeView.containerMain, "Conexion no realizada!\nIntente nuevamente.");
             return;
         }
@@ -244,7 +243,7 @@ public class HomeController {
     public void loadDefaults(String[] array) {
         homeView.containerMain.add(chatViewContainerView);
         ArrayList<User> userList = new ArrayList<User>();
-        if (array.length != 0) {
+        if (array.length > 0) {
             for (int i = 0; i < array.length; i++) {
             User user = new User().getData(array[i]);
             userList.add(user);
