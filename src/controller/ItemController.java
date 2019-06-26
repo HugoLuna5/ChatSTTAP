@@ -59,9 +59,7 @@ public class ItemController {
         if (status) {
             itemList.status.setIcon(new ImageRounded().loadImage(new Constants().rutaImagenStatusOnline(), 25));
 
-        } else {
-            itemList.status.setIcon(new ImageRounded().loadImage(new Constants().rutaImagenStatusOffline(), 25));
-        }
+        } 
 
     }
 
