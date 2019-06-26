@@ -187,7 +187,7 @@ public class HomeController {
         }
 
         this.message = message;
-        JOptionPane.showMessageDialog(homeView.containerMain, "Conectado!");
+        //JOptionPane.showMessageDialog(homeView.containerMain, "Conectado!");
     }
 
     private void disconnected() {

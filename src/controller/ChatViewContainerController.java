@@ -62,11 +62,13 @@ public class ChatViewContainerController {
         chatView.chatContent.removeAll();
         chatView.chatContent.repaint();
 
-        ArrayList<User> listAllUser = new User().getAllUsers(us.getId());
+        System.out.println(userList.size());
+        ArrayList<User> listAllUser = new User().getAllUsers();
 
         for (User user : listAllUser) {
 
-            ItemList item = new ItemList();
+            if (us.getId() != user.getId()) {
+                ItemList item = new ItemList();
             ItemChatContact itemData = new ItemChatContact();
             String name = user.getName();
             String email = user.getEmail();
@@ -90,6 +92,7 @@ public class ChatViewContainerController {
                     new ItemController(item, itemData, chatView, socket, message, service, us, false);
                 }
 
+            }
             }
 
             System.out.println("Lista usuario");

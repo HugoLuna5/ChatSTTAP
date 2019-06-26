@@ -158,15 +158,14 @@ public class User {
 
     
     
-    public ArrayList<User> getAllUsers(int id_user){
+    public ArrayList<User> getAllUsers(){
         ArrayList<User> listUser = new ArrayList<User>();
-        String query = "SELECT * FROM user WHERE id != ?";
+        String query = "SELECT * FROM user ";
         
         
         try {
             Connection conexion = new Conexion().getConnection();
             PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setInt(1, id_user);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
