@@ -241,6 +241,9 @@ public class HomeController {
     }
 
     public void loadDefaults(String[] array) {
+        homeView.containerMain.removeAll();
+        homeView.containerMain.revalidate();
+        homeView.containerMain.repaint();
         homeView.containerMain.add(chatViewContainerView);
         ArrayList<User> userList = new ArrayList<User>();
         if (array.length > 0) {
@@ -252,6 +255,8 @@ public class HomeController {
             
              chatViewContainerController = new ChatViewContainerController(chatViewContainerView, userList, socket, message, service, user);
              homeView.containerMain.revalidate();
+             homeView.containerMain.removeAll();
+             homeView.containerMain.repaint();
             
         }
 
