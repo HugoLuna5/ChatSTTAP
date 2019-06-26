@@ -64,7 +64,6 @@ public class ChatViewContainerController {
 
         ArrayList<User> listAllUser = new User().getAllUsers(us.getId());
 
-        int i = 0;
         for (User user : listAllUser) {
 
             ItemList item = new ItemList();
@@ -80,12 +79,17 @@ public class ChatViewContainerController {
             itemData.setName(name);
             panel.add(item);
 
-            if (user.getEmail().equals(userList.get(i).getEmail())) {
+            for (int i = 0; i < userList.size(); i++) {
 
-                new ItemController(item, itemData, chatView, socket, message, service, us, true);
+                if (user.getEmail().equals(userList.get(i).getEmail())) {
 
-            } else {
-                new ItemController(item, itemData, chatView, socket, message, service, us, false);
+                    new ItemController(item, itemData, chatView, socket, message, service, us, true);
+
+                } else {
+
+                    new ItemController(item, itemData, chatView, socket, message, service, us, false);
+                }
+
             }
 
             System.out.println("Lista usuario");

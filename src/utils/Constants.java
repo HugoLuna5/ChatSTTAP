@@ -39,7 +39,7 @@ public class Constants {
     public String rutaImagenStatusOnline(){
         String ruta = "/Users/hugoluna/Desktop/status_online.png";
         if (isWindows()) {
-            ruta = "C:/Users/Hugo Luna/Desktop/user.png";
+            ruta = "C:/Users/Hugo Luna/Desktop/status_online.png";
         } else if (isMac()) {
             ruta = "/Users/hugoluna/Desktop/status_online.png";
         } else if (isUnix()) {
@@ -57,7 +57,7 @@ public class Constants {
     public String rutaImagenStatusOffline(){
         String ruta = "/Users/hugoluna/Desktop/status_offline.png";
         if (isWindows()) {
-            ruta = "C:/Users/Hugo Luna/Desktop/user.png";
+            ruta = "C:/Users/Hugo Luna/Desktop/status_offline.png";
         } else if (isMac()) {
             ruta = "/Users/hugoluna/Desktop/status_offline.png";
         } else if (isUnix()) {
